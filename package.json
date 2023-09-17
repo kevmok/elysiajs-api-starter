@@ -3,6 +3,9 @@
 	"module": "src/index.ts",
 	"type": "module",
 	"scripts": {
+		"db:generate": "drizzle-kit generate:sqlite",
+		"db:push": "drizzle-kit push:sqlite",
+		"db:studio": "drizzle-kit studio",
 		"prepare": "husky install"
 	},
 	"devDependencies": {
@@ -16,9 +19,10 @@
 		"typescript": "^5.0.0"
 	},
 	"dependencies": {
+		"@elysiajs/cookie": "^0.6.1",
+		"better-sqlite3": "^8.6.0",
 		"drizzle-orm": "^0.28.6",
-		"elysia": "^0.6.20",
-		"postgres": "^3.3.5"
+		"elysia": "^0.6.20"
 	},
 	"lint-staged": {
 		"*.{ts,js}": "bunx biome check --apply ./src",

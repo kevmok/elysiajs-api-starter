@@ -6,6 +6,7 @@
 		"moduleResolution": "bundler",
 		"moduleDetection": "force",
 		"allowImportingTsExtensions": true,
+		"baseUrl": "src",
 		"noEmit": true,
 		"composite": true,
 		"strict": true,

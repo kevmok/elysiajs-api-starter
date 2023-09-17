@@ -14,7 +14,7 @@
 		"formatWithErrors": false,
 		"indentStyle": "tab",
 		"indentSize": 2,
-		"ignore": ["dist/*", "sqlite.db", "*.md", "*.lockb", "node_modules"]
+		"ignore": ["dist/*", "*.db", "*.md", "*.lockb", "node_modules"]
 	},
 	"javascript": {
 		"formatter": {
