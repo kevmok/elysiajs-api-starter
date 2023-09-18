@@ -1,4 +1,4 @@
-name: pnpm Example Workflow
+name: Bun Action Workflow
 on:
   push:
     branches: [main]
