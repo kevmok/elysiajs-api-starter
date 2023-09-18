@@ -3,6 +3,7 @@
 	"module": "src/index.ts",
 	"type": "module",
 	"scripts": {
+		"build": "bun build --target=bun ./src/index.ts --outdir ./dist",
 		"dev": "bun run --watch ./src/index.ts",
 		"db:generate": "drizzle-kit generate:sqlite",
 		"db:push": "drizzle-kit push:sqlite",
