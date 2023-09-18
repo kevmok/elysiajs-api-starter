@@ -24,6 +24,7 @@
 		"@elysiajs/cookie": "^0.6.1",
 		"better-sqlite3": "^8.6.0",
 		"drizzle-orm": "^0.28.6",
+		"drizzle-typebox": "^0.1.1",
 		"elysia": "^0.6.20"
 	},
 	"lint-staged": {

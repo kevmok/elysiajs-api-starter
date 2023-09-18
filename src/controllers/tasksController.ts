@@ -1,5 +1,9 @@
 import { ctx } from 'context';
-import { tasks } from 'db/schema/taskSchema';
+import {
+	insertTaskSchema,
+	selectTaskSchema,
+	tasks,
+} from 'db/schema/taskSchema';
 import { eq } from 'drizzle-orm';
 import Elysia, { t } from 'elysia';
 
@@ -14,13 +18,7 @@ export const tasksController = new Elysia({ prefix: '/tasks' })
 			return taskList;
 		},
 		{
-			response: t.Array(
-				t.Object({
-					id: t.Optional(t.Number()),
-					description: t.String(),
-					completed: t.Boolean(),
-				}),
-			),
+			response: t.Array(selectTaskSchema),
 		},
 	)
 	.post(
@@ -35,10 +33,7 @@ export const tasksController = new Elysia({ prefix: '/tasks' })
 			}
 		},
 		{
-			body: t.Object({
-				description: t.String(),
-				completed: t.Boolean(),
-			}),
+			body: insertTaskSchema,
 		},
 	)
 	.put(
@@ -61,18 +56,27 @@ export const tasksController = new Elysia({ prefix: '/tasks' })
 		},
 		{ body: t.Object({ completed: t.Boolean() }) },
 	)
-	.delete('/:id', async ({ params, db }) => {
-		let [task] = await db()
-			.select()
-			.from(tasks)
-			.where(eq(tasks.id, parseInt(params.id)));
+	.delete(
+		'/:id',
+		async ({ params, db }) => {
+			let [task] = await db()
+				.select()
+				.from(tasks)
+				.where(eq(tasks.id, parseInt(params.id)));
 
-		if (!task) return { message: 'Task does not exist' };
+			if (!task) return { message: 'Task does not exist' };
 
-		[task] = await db()
-			.delete(tasks)
-			.where(eq(tasks.id, parseInt(params.id)))
-			.returning();
+			[task] = await db()
+				.delete(tasks)
+				.where(eq(tasks.id, parseInt(params.id)))
+				.returning();
 
-		return { message: 'Task succesfully deleted!', task };
-	});
+			return { message: 'Task succesfully deleted!', task };
+		},
+		{
+			response: t.Object({
+				message: t.String(),
+				task: t.Optional(selectTaskSchema),
+			}),
+		},
+	);
