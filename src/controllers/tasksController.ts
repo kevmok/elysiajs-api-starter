@@ -7,12 +7,16 @@ import {
 import { eq } from 'drizzle-orm';
 import Elysia, { t } from 'elysia';
 
+const responseSchema = t.Object({
+	message: t.String(),
+	task: t.Optional(insertTaskSchema),
+});
+
 export const tasksController = new Elysia({ prefix: '/tasks' })
 	.use(ctx)
 	.get(
 		'/',
 		async ({ db }) => {
-			console.log('here');
 			const taskList = await db().select().from(tasks);
 			console.log(taskList);
 			return taskList;
@@ -25,7 +29,7 @@ export const tasksController = new Elysia({ prefix: '/tasks' })
 		'/',
 		async ({ body, db }) => {
 			try {
-				const task = await db().insert(tasks).values(body).returning();
+				const [task] = await db().insert(tasks).values(body).returning();
 				return { message: 'Task created', task };
 			} catch (error) {
 				console.log(error);
@@ -34,6 +38,7 @@ export const tasksController = new Elysia({ prefix: '/tasks' })
 		},
 		{
 			body: insertTaskSchema,
+			response: responseSchema,
 		},
 	)
 	.put(
@@ -52,9 +57,13 @@ export const tasksController = new Elysia({ prefix: '/tasks' })
 				.where(eq(tasks.id, parseInt(params.id)))
 				.returning();
 
-			return { task };
+			return { message: 'Task succesfully updated', task };
 		},
-		{ body: t.Object({ completed: t.Boolean() }) },
+		{
+			params: t.Object({ id: t.String() }),
+			body: t.Object({ completed: t.Boolean() }),
+			response: responseSchema,
+		},
 	)
 	.delete(
 		'/:id',
@@ -74,9 +83,7 @@ export const tasksController = new Elysia({ prefix: '/tasks' })
 			return { message: 'Task succesfully deleted!', task };
 		},
 		{
-			response: t.Object({
-				message: t.String(),
-				task: t.Optional(selectTaskSchema),
-			}),
+			params: t.Object({ id: t.String() }),
+			response: responseSchema,
 		},
 	);
