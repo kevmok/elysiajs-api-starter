@@ -1,34 +1,34 @@
 {
-  "name": "bun-elysia-rest-api",
-  "module": "src/index.ts",
-  "type": "module",
-  "scripts": {
-    "build": "bun build --target=bun ./src/index.ts --outdir ./dist",
-    "dev": "bun run --watch ./src/index.ts",
-    "db:generate": "drizzle-kit generate:sqlite",
-    "db:push": "drizzle-kit push:sqlite",
-    "db:studio": "drizzle-kit studio",
-    "prepare": "husky install"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "1.1.2",
-    "bun-types": "latest",
-    "drizzle-kit": "^0.19.13",
-    "husky": "^8.0.3",
-    "lint-staged": "^14.0.1"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "@elysiajs/cookie": "^0.6.1",
-    "better-sqlite3": "^8.6.0",
-    "drizzle-orm": "^0.28.6",
-    "drizzle-typebox": "^0.1.1",
-    "elysia": "^0.6.20"
-  },
-  "lint-staged": {
-    "*.{ts,js}": "bunx biome check --apply-unsafe ./src",
-    "**/*": "bunx biome format ./src --write --files-ignore-unknown=true"
-  }
+	"name": "bun-elysia-rest-api",
+	"module": "src/index.ts",
+	"type": "module",
+	"scripts": {
+		"build": "bun build --target=bun ./src/index.ts --outdir ./dist",
+		"dev": "bun run --watch ./src/index.ts",
+		"db:generate": "drizzle-kit generate:sqlite",
+		"db:push": "drizzle-kit push:sqlite",
+		"db:studio": "drizzle-kit studio",
+		"prepare": "husky install"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.1.2",
+		"bun-types": "latest",
+		"drizzle-kit": "^0.19.13",
+		"husky": "^8.0.3",
+		"lint-staged": "^14.0.1"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"dependencies": {
+		"@elysiajs/cookie": "^0.7.0",
+		"better-sqlite3": "^8.6.0",
+		"drizzle-orm": "^0.28.6",
+		"drizzle-typebox": "^0.1.1",
+		"elysia": "^0.7.6"
+	},
+	"lint-staged": {
+		"*.{ts,js}": "bunx biome check --apply-unsafe ./src",
+		"**/*": "bunx biome format ./src --write --files-ignore-unknown=true"
+	}
 }
