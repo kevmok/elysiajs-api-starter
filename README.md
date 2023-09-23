@@ -52,6 +52,13 @@ bun run db:push
 bun run db:studio
 ```
 
+## Roadmap
+- [ ] Add support for PostgreSQL
+- [ ] Implement JWT-cookie uthentication 
+- [ ] Add file upload functionality
+- [ ] Implement role-based access control (RBAC)
+- [ ] Add caching
+
 ## License
 This project is licensed under the MIT License.
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
